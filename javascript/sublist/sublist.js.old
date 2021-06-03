@@ -1,0 +1,47 @@
+const allElements = (ar1, ar2, i=0) =>{
+  //Checks all first elements of ar1 in ar2 if all following elements of ar1
+  //are also included, if not the following instance is checked
+    let [indexAr1, indexAr2] = [0,ar2.indexOf(ar1[0],i)];
+    if( indexAr2 <0){return false;}
+    while( indexAr1 < ar1.length
+      && ar1[indexAr1] === ar2[indexAr2]){
+      ++indexAr1;
+      ++indexAr2;
+    }
+    return indexAr1 === ar1.length ? true : allElements(ar1, ar2, ++i);
+};
+//checks if ar1 is a sublist of ar2
+const issublist = (ar1, ar2) =>{
+  ar1 = ar1 || [];
+  
+  if( ar1.length ===0){
+    return true;}
+  if(ar1.length > ar2.length 
+    || !ar2.includes(ar1[0]) 
+    || !ar2.includes(ar1[ar1.length-1]))
+  {
+    return false;}
+  else{
+  }
+  return allElements(ar1, ar2);
+
+};
+
+export class List {
+  constructor(l) {
+    this.list_ = l || [];
+  }
+
+  compare(l) {
+    if(this.list_.length === l.list_.length  
+      && issublist(this.list_, l.list_)
+    ){ return 'EQUAL';}
+
+    else if(issublist( this.list_, l.list_))
+   { 
+      return 'SUBLIST';}
+    else if(issublist(l.list_, this.list_))
+    { return 'SUPERLIST';}
+    else {return 'UNEQUAL';}
+  }
+}

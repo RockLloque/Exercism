@@ -1,0 +1,21 @@
+
+export class translator {
+  static translate(sentence){
+    return sentence.split(' ').map(w => this.translateWord(w)).join(' ');
+  }
+  static translateWord(word) {
+    if(word.match(/^([aeiou]|xr|yt)/i)){
+      word += 'ay';
+    }
+    else if(word.match(/^(sch|thr|squ)/i)){
+      word = word.slice(3) + word.slice(0,3) + 'ay';
+    }
+    else if(word.match(/^(ch|qu|sq|th|rhy)/i)){
+      word = word.slice(2) + word.slice(0,2) + 'ay';
+    }
+    else{
+      word = word.slice(1) + word.slice(0,1) + 'ay';
+    }
+    return word;
+  }
+}
